@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "access_point": "hosts/DESKTOP-K045I3P/DeviceIpint.1/SourceEndpoint.video:0:0",
+      "incomplete": false,
+      "display_name": "real onvif",
+      "display_id": "1",
+      "ip_address": "192.168.1.89",
+      "camera_access": "CAMERA_ACCESS_FULL",
+      "vendor": "ONVIF 2.X",
+      "model": "1_channel_multistream",
+      "firmware": "auto",
+      "enabled": true,
+      "is_activated": false
+    }
+  ],
+  "next_page_token": "",
+  "search_meta_data": [
+    {
+      "score": 0,
+      "matches": []
+    }
+  ]
+}
