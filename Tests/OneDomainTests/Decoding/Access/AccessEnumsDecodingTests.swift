@@ -28,12 +28,21 @@ struct AccessEnumsDecodingTests {
         #expect(binding.archive?.archiveAccess?.rawValue == "ARCHIVE_ACCESS_FULL")
     }
 
+    @Test("TelemetryPriority highest from real server JSON")
+    func telemetry_priority_highest() throws {
+        let json = """
+        {"access_point":"hosts/1/Telemetry.1","display_name":"PTZ","display_id":"1","telemetry_priority":"TELEMETRY_PRIORITY_HIGHEST","enabled":true,"discrete_over_continuous":false,"patrol_state_control_access_point":"hosts/1/Patrol.1","is_activated":true}
+        """
+        let ptz = try JSONDecoder().decode(Telemetry.self, from: Data(json.utf8))
+        #expect(ptz.telemetryPriority?.value == .highest)
+    }
+
     @Test("TelemetryPriority from minimal JSON")
     func telemetry_priority() throws {
         let json = """
         {"access_point":"hosts/1/Telemetry.1","display_name":"PTZ","display_id":"1","telemetry_priority":"TELEMETRY_PRIORITY_NO_ACCESS","enabled":true,"discrete_over_continuous":false,"patrol_state_control_access_point":"hosts/1/Patrol.1","is_activated":true}
         """
         let ptz = try JSONDecoder().decode(Telemetry.self, from: Data(json.utf8))
-        #expect(ptz.telemetryPriority == .noAccess)
+        #expect(ptz.telemetryPriority?.value == .noAccess)
     }
 }

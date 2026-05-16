@@ -4,6 +4,15 @@ import Testing
 
 @Suite("Detector decoding")
 struct DetectorDecodingTests {
+    @Test("decode without storyboard")
+    func decode_without_storyboard() throws {
+        let json = """
+        {"access_point":"hosts/1/Detectors.1","display_name":"Detector","display_id":"1","parent_detector":"","type":"t","type_name":"Type","is_activated":true,"groups":[],"scene_descriptions":[],"events":[],"enabled":true,"is_realtime_recognition_enabled":false,"is_recording_objects_tracking_enabled":false}
+        """
+        let value = try JSONDecoder().decode(Detector.self, from: Data(json.utf8))
+        #expect(value.storyboard == nil)
+    }
+
     @Test("decode minimal JSON")
     func decode_minimal() throws {
         let json = """

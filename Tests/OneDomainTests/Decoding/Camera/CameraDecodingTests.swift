@@ -66,4 +66,13 @@ struct CameraDecodingTests {
         let camera = try decoder.decode(Camera.self, from: json)
         #expect(camera.cameraAccess.rawValue == "CAMERA_ACCESS_FULL")
     }
+    
+    @Test("decode cameras from real SSE bug_detector_no_storyboard.sse")
+    func decode_real_server_sse_without_event_separator() throws {
+        let raw = try FixtureLoader.loadData(resource: "bug_detector_no_storyboard", ext: "sse")
+        let pages = try decodeSse(CameraListPage.self, from: raw, using: decoder)
+        let withItems = try #require(pages.first { !$0.items.isEmpty })
+        #expect(withItems.items.count == 7)
+        #expect(withItems.items.contains { ($0.detectors?.isEmpty == false) })
+    }
 }

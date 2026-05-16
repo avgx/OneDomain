@@ -17,8 +17,8 @@ public struct Detector: Decodable, Equatable, Sendable, Identifiable {
     public let enabled: Bool
     public let isRealtimeRecognitionEnabled: Bool
     public let isRecordingObjectsTrackingEnabled: Bool
-    /// Endpoint of the event frame stream.
-    public let storyboard: String
+    /// Endpoint of the event frame stream. Omitted by some server builds when unused.
+    public let storyboard: String?
     /// Shows whether face detector build biometric vectors.
     public let isBiometricRecognitionEnabled: Bool?
     /// Shows whether neurotracker determines color of objects.
@@ -45,4 +45,31 @@ public struct Detector: Decodable, Equatable, Sendable, Identifiable {
         case isColorRecognitionEnabled = "is_color_recognition_enabled"
         case reportImageDescriptor = "report_image_descriptor"
     }
+
+//    public init(from decoder: any Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        accessPoint = try container.decode(AccessPoint.self, forKey: .accessPoint)
+//        displayName = try container.decode(String.self, forKey: .displayName)
+//        displayId = try container.decode(String.self, forKey: .displayId)
+//        parentDetector = try container.decode(AccessPoint.self, forKey: .parentDetector)
+//        type = try container.decode(String.self, forKey: .type)
+//        typeName = try container.decode(String.self, forKey: .typeName)
+//        isActivated = try container.decode(Bool.self, forKey: .isActivated)
+//        groups = try container.decode([String].self, forKey: .groups)
+//        sceneDescriptions = try container.decode([SceneDescription].self, forKey: .sceneDescriptions)
+//        events = try container.decode([DetectorEventInfo].self, forKey: .events)
+//        enabled = try container.decode(Bool.self, forKey: .enabled)
+//        isRealtimeRecognitionEnabled = try container.decode(Bool.self, forKey: .isRealtimeRecognitionEnabled)
+//        isRecordingObjectsTrackingEnabled = try container.decode(
+//            Bool.self,
+//            forKey: .isRecordingObjectsTrackingEnabled
+//        )
+//        storyboard = try container.decodeIfPresent(String.self, forKey: .storyboard) ?? ""
+//        isBiometricRecognitionEnabled = try container.decodeIfPresent(
+//            Bool.self,
+//            forKey: .isBiometricRecognitionEnabled
+//        )
+//        isColorRecognitionEnabled = try container.decodeIfPresent(Bool.self, forKey: .isColorRecognitionEnabled)
+//        reportImageDescriptor = try container.decodeIfPresent(Bool.self, forKey: .reportImageDescriptor)
+//    }
 }

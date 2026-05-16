@@ -1,11 +1,12 @@
 import Foundation
+import SafeEnum
 
 /// Telemetry configuration.
 public struct Telemetry: Codable, Equatable, Sendable {
     public let accessPoint: AccessPoint
     public let displayName: String
     public let displayId: String
-    public let telemetryPriority: TelemetryPriority?
+    public let telemetryPriority: SafeEnum<TelemetryPriority>?
     public let enabled: Bool
     public let capabilities: TelemetryCapabilities?
     public let discreteOverContinuous: Bool
