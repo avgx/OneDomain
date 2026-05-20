@@ -1,0 +1,105 @@
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+Content-Length: 2644
+
+{
+ "items": [
+  {
+   "access_point": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+   "display_name": "Camera 1",
+   "display_id": "1",
+   "ip_address": "0.0.0.0",
+   "camera_access": "CAMERA_ACCESS_FULL",
+   "vendor": "Virtual",
+   "model": "Virtual",
+   "firmware": "1.0.0",
+   "enabled": true,
+   "is_activated": true,
+   "video_streams": [
+    {
+     "stream_acess_point": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+     "decoder_acess_point": "hosts/DemoServer/VideoDecoder.1/SourceEndpoint.video",
+     "enabled": true,
+     "display_name": "Main stream",
+     "display_id": "0",
+     "is_activated": true
+    }
+   ],
+   "archive_bindings": [
+    {
+     "name": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+     "storage": "hosts/DemoServer/MultimediaStorage.A/MultimediaStorage",
+     "archive": {
+      "access_point": "hosts/DemoServer/MultimediaStorage.A/MultimediaStorage",
+      "display_name": "Archive A",
+      "display_id": "MultimediaStorage.A",
+      "is_embedded": false,
+      "archive_access": "ARCHIVE_ACCESS_FULL",
+      "bindings": [],
+      "is_activated": true,
+      "enabled": true
+     },
+     "is_default": true,
+     "is_replica": false,
+     "is_permanent": true,
+     "sources": [
+      {
+       "access_point": "hosts/DemoServer/MultimediaStorage.A/Sources/src.8F3D2A1B-4C5E-6F70-8192-A3B4C5D6E7F8",
+       "storage": "hosts/DemoServer/MultimediaStorage.A/MultimediaStorage",
+       "binding": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+       "media_source": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+       "origin": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+       "mimetype": "video/h264",
+       "origin_storage": "",
+       "origin_storage_source": ""
+      }
+     ]
+    }
+   ],
+   "detectors": [
+    {
+     "access_point": "hosts/DemoServer/AVDetector.1/EventSupplier",
+     "display_name": "Face detector",
+     "display_id": "1",
+     "parent_detector": "",
+     "type": "TvaFaceDetector",
+     "type_name": "Face detector",
+     "is_activated": false,
+     "groups": [],
+     "scene_descriptions": [
+      {
+       "access_point": "hosts/DemoServer/AVDetector.1/SourceEndpoint.vmda",
+       "mimetype": "application/vmda"
+      }
+     ],
+     "events": [
+      {
+       "id": "TargetList",
+       "name": "Detected faces",
+       "event_type": "PERIODICAL_EVENT_TYPE"
+      }
+     ],
+     "enabled": false
+    }
+   ],
+   "ptzs": [],
+   "microphones": [],
+   "ray": [],
+   "relay": [],
+   "offline_detectors": [],
+   "group_ids": [],
+   "speakers": [],
+   "text_sources": []
+  }
+ ],
+ "next_page_token": ""
+}
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+Content-Length: 40
+
+{
+ "items": [],
+ "next_page_token": ""
+}
+--ngpboundary

@@ -44,6 +44,19 @@ struct CameraDecodingTests {
         let withItems = try #require(pages.first { !$0.items.isEmpty })
         #expect(withItems.items.first?.accessPoint.isEmpty == false)
     }
+    
+    @Test("decode cameras from raw multipart v1_domain_cameras_x5_0.multipart")
+    func decode_multipart_x5() throws {
+        let raw = try FixtureLoader.loadData(resource: "v1_domain_cameras_x5_0", ext: "multipart")
+        let pages = try decodeMultipartRelated(
+            CameraListPage.self,
+            contentType: "multipart/related; boundary=ngpboundary",
+            from: raw,
+            using: decoder
+        )
+        let withItems = try #require(pages.first { !$0.items.isEmpty })
+        #expect(withItems.items.first?.accessPoint.isEmpty == false)
+    }
 
     @Test("decode cameras from raw SSE v1_domain_cameras_2_0_0.sse")
     func decode_sse_2_0_0() throws {

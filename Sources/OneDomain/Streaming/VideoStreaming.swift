@@ -8,7 +8,7 @@ public struct VideoStreaming: Codable, Equatable, Sendable {
     public let displayName: String
     public let displayId: String
     /// Framerate (configured).
-    public let fps: Int
+    public let fps: Int?
     public let isActivated: Bool
 
     private enum CodingKeys: String, CodingKey {

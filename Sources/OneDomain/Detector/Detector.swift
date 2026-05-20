@@ -15,8 +15,8 @@ public struct Detector: Decodable, Equatable, Sendable, Identifiable {
     public let sceneDescriptions: [SceneDescription]
     public let events: [DetectorEventInfo]
     public let enabled: Bool
-    public let isRealtimeRecognitionEnabled: Bool
-    public let isRecordingObjectsTrackingEnabled: Bool
+    public let isRealtimeRecognitionEnabled: Bool?
+    public let isRecordingObjectsTrackingEnabled: Bool?
     /// Endpoint of the event frame stream. Omitted by some server builds when unused.
     public let storyboard: String?
     /// Shows whether face detector build biometric vectors.

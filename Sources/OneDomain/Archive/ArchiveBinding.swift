@@ -10,8 +10,8 @@ public struct ArchiveBinding: Decodable, Equatable, Sendable {
     public let isDefault: Bool
     public let isReplica: Bool
     public let isPermanent: Bool
-    public let hasLiveSources: Bool
-    public let hasReplicaSources: Bool
+    public let hasLiveSources: Bool?
+    public let hasReplicaSources: Bool?
     public let originStorage: String?
     public let sources: [StorageSource]
 

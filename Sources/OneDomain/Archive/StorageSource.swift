@@ -10,7 +10,7 @@ public struct StorageSource: Decodable, Equatable, Sendable {
     public let mimetype: String
     public let originStorage: String
     public let originStorageSource: String
-    public let prerecording: Int
+    public let prerecording: Int?
 
     private enum CodingKeys: String, CodingKey {
         case accessPoint = "access_point"

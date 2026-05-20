@@ -6,7 +6,7 @@ public struct Archive: Decodable, Equatable, Sendable, Identifiable {
     public var id: String { accessPoint }
 
     public let accessPoint: AccessPoint
-    public let incomplete: Bool
+    public let incomplete: Bool?
     public let displayName: String
     public let displayId: String
     public let isEmbedded: Bool             // deprecated, use storage_type

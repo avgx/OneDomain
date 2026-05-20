@@ -13,7 +13,7 @@ public struct Camera: Decodable, Equatable, Sendable, Identifiable {
 
     public let accessPoint: AccessPoint
     /// Indicates that the camera information is incomplete (the server was unable to retrieve it).
-    public let incomplete: Bool
+    public let incomplete: Bool?
     public let displayName: String
     public let displayId: String
     public let ipAddress: String
