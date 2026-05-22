@@ -4,9 +4,9 @@ import Foundation
 public struct ArchiveBinding: Decodable, Equatable, Sendable {
     /// Usually camera or source name.
     public let name: String
-    public let storage: String
-    public let camera: Camera?
-    public let archive: Archive?
+    public let storage: AccessPoint
+    public let camera: Camera?      //TODO: check it.
+    public let archive: Archive?    //TODO: check it.
     public let isDefault: Bool
     public let isReplica: Bool
     public let isPermanent: Bool

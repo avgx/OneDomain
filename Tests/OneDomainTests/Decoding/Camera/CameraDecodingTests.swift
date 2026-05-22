@@ -88,4 +88,16 @@ struct CameraDecodingTests {
         #expect(withItems.items.count == 7)
         #expect(withItems.items.contains { ($0.detectors?.isEmpty == false) })
     }
+
+    @Test("decode cameras from raw SSE v1_domain_cameras_2_10_0_full.sse")
+    func decode_sse_full() throws {
+        let raw = try FixtureLoader.loadData(resource: "v1_domain_cameras_2_10_0_full", ext: "sse")
+        let pages = try decodeSse(CameraListPage.self, from: raw, using: decoder)
+        let withItems = try #require(pages.first { !$0.items.isEmpty })
+        #expect(withItems.items.count == 2)
+        #expect(withItems.items.first?.archiveBindings?.isEmpty == false)
+        #expect(withItems.items.first?.detectors?.isEmpty == false)
+        #expect(withItems.items.first?.alternativeView?.alternativeCameraName.isEmpty == true)
+        #expect(withItems.items.last?.detectors?.contains { $0.parentDetector?.isEmpty == false } == true)
+    }
 }

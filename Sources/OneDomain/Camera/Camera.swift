@@ -31,8 +31,8 @@ public struct Camera: Decodable, Equatable, Sendable, Identifiable {
     public let geoLocationAzimuth: String?
     public let breaksUnusedConnections: Bool?
     public let serialNumber: String?
-    public let videoStreams: [VideoStreaming]?
-    public let microphones: [AudioStreaming]?
+    public let videoStreams: [VideoStream]?
+    public let microphones: [AudioStream]?
     public let ptzs: [Telemetry]?
     public let archiveBindings: [ArchiveBinding]?
     public let ray: [Ray]?
@@ -53,7 +53,12 @@ public struct Camera: Decodable, Equatable, Sendable, Identifiable {
     public let modelDisplayName: String?
     /// Has access to any (not embedded!) archive binding.
     public let hasArchiveBindings: Bool?
-    /// The type of camera (e.g. bullet, speed_dome, fix_dome).
+    /// The type of camera
+    /// Possible values:
+    /// * bullet
+    /// * speed_dome
+    /// * fix_dome
+    /// or empty if not specified
     public let type: String?
     public let privacyMask: [CameraPrivacyMask]?
     /// Collection of text overlays to be displayed over current camera's video streams.

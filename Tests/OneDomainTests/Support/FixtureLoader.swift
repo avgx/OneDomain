@@ -18,6 +18,16 @@ enum FixtureLoader {
         return try #require(page.items.first)
     }
 
+    static func loadArchiveListPage(resource: String, ext: String, decoder: JSONDecoder = JSONDecoder()) throws -> ArchiveListPage {
+        let data = try loadData(resource: resource, ext: ext)
+        return try decoder.decode(ArchiveListPage.self, from: data)
+    }
+
+    static func firstArchive(resource: String, ext: String, decoder: JSONDecoder = JSONDecoder()) throws -> Archive {
+        let page = try loadArchiveListPage(resource: resource, ext: ext, decoder: decoder)
+        return try #require(page.items.first)
+    }
+
     /// JSON for `items[0]` from a list fixture.
     static func firstCameraJSON(resource: String, ext: String) throws -> Data {
         let root = try loadJSONObject(resource: resource, ext: ext)

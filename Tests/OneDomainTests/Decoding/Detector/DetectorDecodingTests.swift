@@ -21,4 +21,23 @@ struct DetectorDecodingTests {
         let value = try JSONDecoder().decode(Detector.self, from: Data(json.utf8))
         #expect(value.accessPoint.isEmpty == false)
     }
+
+    @Test("parent_detector empty string decodes as empty not nil")
+    func parent_detector_empty_string() throws {
+        let json = """
+        {"access_point":"hosts/1/Detectors.1","display_name":"Detector","display_id":"1","parent_detector":"","type":"t","type_name":"Type","is_activated":true,"groups":[],"scene_descriptions":[],"events":[],"enabled":true}
+        """
+        let value = try JSONDecoder().decode(Detector.self, from: Data(json.utf8))
+        #expect(value.parentDetector != nil)
+        #expect(value.parentDetector?.isEmpty == true)
+    }
+
+    @Test("parent_detector absent decodes as nil")
+    func parent_detector_absent() throws {
+        let json = """
+        {"access_point":"hosts/1/Detectors.1","display_name":"Detector","display_id":"1","type":"t","type_name":"Type","is_activated":true,"groups":[],"scene_descriptions":[],"events":[],"enabled":true}
+        """
+        let value = try JSONDecoder().decode(Detector.self, from: Data(json.utf8))
+        #expect(value.parentDetector == nil)
+    }
 }

@@ -51,4 +51,12 @@ struct CameraListPageDecodingTests {
         let pages = try decodeSse(CameraListPage.self, from: raw, using: decoder)
         #expect(pages.isEmpty == false)
     }
+
+    @Test("decode raw v1_domain_cameras_2_10_0_full.sse")
+    func decode_sse_full() throws {
+        let raw = try FixtureLoader.loadData(resource: "v1_domain_cameras_2_10_0_full", ext: "sse")
+        let pages = try decodeSse(CameraListPage.self, from: raw, using: decoder)
+        let withItems = try #require(pages.first { !$0.items.isEmpty })
+        #expect(withItems.items.count == 2)
+    }
 }

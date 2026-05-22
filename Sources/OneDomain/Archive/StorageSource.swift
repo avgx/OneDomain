@@ -3,13 +3,15 @@ import Foundation
 /// Storage source for archiving.
 public struct StorageSource: Decodable, Equatable, Sendable {
     public let accessPoint: AccessPoint
-    public let storage: String
-    public let binding: String
-    public let mediaSource: String
-    public let origin: String
+    public let storage: AccessPoint
+    public let binding: String  //TODO: check AccessPoint
+    public let mediaSource: AccessPoint
+    public let origin: AccessPoint
     public let mimetype: String
-    public let originStorage: String
-    public let originStorageSource: String
+    /// can be empty string
+    public let originStorage: AccessPoint?
+    /// can be empty string
+    public let originStorageSource: AccessPoint?
     public let prerecording: Int?
 
     private enum CodingKeys: String, CodingKey {

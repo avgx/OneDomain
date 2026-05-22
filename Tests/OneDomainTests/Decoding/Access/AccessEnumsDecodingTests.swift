@@ -15,7 +15,7 @@ struct AccessEnumsDecodingTests {
         let json = """
         {"access_point":"hosts/1/Microphones.1","display_name":"Mic","display_id":"1","microphone_access":"MICROPHONE_ACCESS_FULL","is_activated":true,"enabled":true}
         """
-        let mic = try JSONDecoder().decode(AudioStreaming.self, from: Data(json.utf8))
+        let mic = try JSONDecoder().decode(AudioStream.self, from: Data(json.utf8))
         #expect(mic.microphoneAccess?.rawValue == "MICROPHONE_ACCESS_FULL")
     }
 

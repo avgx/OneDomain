@@ -30,4 +30,22 @@ public enum DomainApi {
             body: body
         )
     }
+    
+    /// Endpoint: `GET /v1/domain/archives`
+    ///
+    /// Response is SSE (`text/event-stream`) or `multipart/related` with JSON in `data` payloads.
+    public static func archives(view: ViewMode? = nil) -> Request<Data> {
+        var queryItems: [(String, String?)] = []
+
+        if let view {
+            queryItems.append(("view", view.rawValue))
+        }
+
+        return Request(
+            path: "v1/domain/archives",
+            method: .get,
+            query: queryItems.isEmpty ? nil : queryItems
+        )
+    }
+
 }

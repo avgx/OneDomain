@@ -2,7 +2,7 @@ import Foundation
 import SafeEnum
 
 /// Audio streaming configuration.
-public struct AudioStreaming: Codable, Equatable, Sendable {
+public struct AudioStream: Codable, Equatable, Sendable {
     public let accessPoint: AccessPoint
     public let displayName: String
     public let displayId: String

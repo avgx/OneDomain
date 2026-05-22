@@ -1,7 +1,7 @@
 import Foundation
 
 /// Video streaming configuration.
-public struct VideoStreaming: Codable, Equatable, Sendable {
+public struct VideoStream: Codable, Equatable, Sendable {
     public let streamAcessPoint: AccessPoint
     public let decoderAcessPoint: AccessPoint
     public let enabled: Bool
