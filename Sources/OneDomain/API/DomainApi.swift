@@ -1,5 +1,4 @@
 import Foundation
-import EncodeDecode
 import RequestResponse
 
 /// Domain API (Native BL `v1/domain/*`).
