@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Represents a speaker device.
 public struct Speaker: Decodable, Equatable, Sendable, Identifiable {

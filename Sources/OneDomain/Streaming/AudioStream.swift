@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 import SafeEnum
 
 /// Audio streaming configuration.

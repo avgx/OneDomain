@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Archive binding configuration.
 public struct ArchiveBinding: Decodable, Equatable, Sendable {

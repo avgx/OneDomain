@@ -1,5 +1,6 @@
 import EncodeDecode
 import Foundation
+import OneWireFormat
 import Testing
 @testable import OneDomain
 

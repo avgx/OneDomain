@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Storage source for archiving.
 public struct StorageSource: Decodable, Equatable, Sendable {

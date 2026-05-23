@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Detector configuration.
 public struct Detector: Decodable, Equatable, Sendable, Identifiable {

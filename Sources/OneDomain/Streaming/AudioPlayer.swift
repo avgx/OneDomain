@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Represents an audio player for a speaker.
 public struct AudioPlayer: Decodable, Equatable, Sendable {

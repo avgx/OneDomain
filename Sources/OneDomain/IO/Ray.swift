@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Ray sensor.
 public struct Ray: Codable, Equatable, Sendable, Identifiable {

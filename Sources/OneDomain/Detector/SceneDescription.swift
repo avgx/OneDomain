@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Scene description for detector.
 public struct SceneDescription: Decodable, Equatable, Sendable {

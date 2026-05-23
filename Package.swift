@@ -21,6 +21,7 @@ let package = Package(
         .package(url: "https://github.com/avgx/RequestResponse", from: "2.0.0"),
         .package(url: "https://github.com/avgx/SafeEnum", from: "1.0.0"),
         .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.2"),
+        .package(url: "https://github.com/avgx/OneWireFormat", from: "1.0.0"),
     ],
     targets: [
         .target(
@@ -28,12 +29,14 @@ let package = Package(
             dependencies: [
                 .product(name: "RequestResponse", package: "RequestResponse"),
                 .product(name: "SafeEnum", package: "SafeEnum"),
+                .product(name: "OneWireFormat", package: "OneWireFormat"),
             ]
         ),
         .testTarget(
             name: "OneDomainTests",
             dependencies: [
                 "OneDomain",
+                .product(name: "OneWireFormat", package: "OneWireFormat"),
                 .product(name: "EncodeDecode", package: "EncodeDecode"),
             ],
             resources: [

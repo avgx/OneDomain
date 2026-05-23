@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Tag and track configuration.
 public struct TagAndTrack: Codable, Equatable, Sendable {

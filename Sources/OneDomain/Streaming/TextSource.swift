@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Text source configuration.
 public struct TextSource: Codable, Equatable, Sendable, Identifiable {

@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Resource locator for batch operations.
 public struct ResourceLocator: Codable, Equatable, Sendable {

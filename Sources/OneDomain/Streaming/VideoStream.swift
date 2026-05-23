@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Video streaming configuration.
 public struct VideoStream: Codable, Equatable, Sendable {

@@ -1,4 +1,5 @@
 import Foundation
+import OneWireFormat
 
 /// Relay control.
 public struct Relay: Codable, Equatable, Sendable, Identifiable {
