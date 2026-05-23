@@ -20,7 +20,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/avgx/RequestResponse", from: "2.0.0"),
         .package(url: "https://github.com/avgx/SafeEnum", from: "1.0.0"),
-        .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.2"),
+        .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.4"),
         .package(url: "https://github.com/avgx/OneWireFormat", from: "1.0.0"),
     ],
     targets: [
@@ -28,6 +28,7 @@ let package = Package(
             name: "OneDomain",
             dependencies: [
                 .product(name: "RequestResponse", package: "RequestResponse"),
+                .product(name: "EncodeDecode", package: "EncodeDecode"),
                 .product(name: "SafeEnum", package: "SafeEnum"),
                 .product(name: "OneWireFormat", package: "OneWireFormat"),
             ]

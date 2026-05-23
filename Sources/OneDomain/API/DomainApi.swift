@@ -1,4 +1,5 @@
 import Foundation
+import EncodeDecode
 import RequestResponse
 
 /// Domain API (Native BL `v1/domain/*`).
@@ -6,7 +7,7 @@ public enum DomainApi {
     /// Endpoint: `GET /v1/domain/cameras`
     ///
     /// Response is SSE (`text/event-stream`) or `multipart/related` with JSON in `data` payloads.
-    public static func cameras(view: ViewMode? = nil) -> Request<Data> {
+    public static func cameras(view: ViewMode? = nil) -> Request<PagedResponse<CameraListPage>> {
         var queryItems: [(String, String?)] = []
 
         if let view {
@@ -23,7 +24,7 @@ public enum DomainApi {
     /// Endpoint: `POST /v1/domain/cameras:batchGet`
     ///
     /// Response is SSE with JSON payloads in `data` lines.
-    public static func camerasBatchGet(_ body: BatchGetCamerasRequest) -> Request<Data> {
+    public static func camerasBatchGet(_ body: BatchGetCamerasRequest) -> Request<PagedResponse<BatchGetCamerasResponse>> {
         Request(
             path: "v1/domain/cameras:batchGet",
             method: .post,
@@ -34,7 +35,7 @@ public enum DomainApi {
     /// Endpoint: `GET /v1/domain/archives`
     ///
     /// Response is SSE (`text/event-stream`) or `multipart/related` with JSON in `data` payloads.
-    public static func archives(view: ViewMode? = nil) -> Request<Data> {
+    public static func archives(view: ViewMode? = nil) -> Request<PagedResponse<ArchiveListPage>> {
         var queryItems: [(String, String?)] = []
 
         if let view {
