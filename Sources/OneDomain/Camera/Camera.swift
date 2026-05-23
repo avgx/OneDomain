@@ -1,4 +1,5 @@
 import Foundation
+import OneSecurity
 import OneWireFormat
 import SafeEnum
 

@@ -11,7 +11,8 @@ The package does **not** use protobuf code generation. Models are maintained as 
 
 | Package | Role in OneDomain |
 |---------|-------------------|
-| [RequestResponse](https://github.com/avgx/RequestResponse) | `DomainApi` returns `Request<Data>` for list/batch camera endpoints |
+| [RequestResponse](https://github.com/avgx/RequestResponse) | `DomainApi` returns `Request<PagedResponse<T>>` for paged list/batch endpoints |
+| [OneSecurity](https://github.com/avgx/OneSecurity) | `CameraAccess`, `MicrophoneAccess`, `ArchiveAccess`; `Camera.viewPolicy(for:)` |
 | [SafeEnum](https://github.com/avgx/SafeEnum) | Unknown enum wire values decode without failing the whole payload (e.g. `camera_access`) |
 | [EncodeDecode](https://github.com/avgx/EncodeDecode) | **Tests only** — `decodeSse`, `decodeMultipartRelated` for raw `.sse` / `.multipart` fixtures |
 
@@ -33,38 +34,50 @@ Optional query/body `view` uses `ViewMode` (`VIEW_MODE_NO_CHILD_OBJECTS`, `VIEW_
 - **`BatchGetCamerasRequest` / `BatchGetCamerasResponse`**, **`ResourceLocator`** — batch get by access points.
 - Nested types grouped by folder (see [Module layout](#module-layout)).
 
-**Out of scope here (separate packages later):** security/permissions DTOs, search metadata (`search_meta_data`), protobuf codegen.
+Security types and policy live in **OneSecurity**.
 
 ### Access enums on the camera tree
 
-Only enums referenced from `Camera` and its nested types:
+From **OneSecurity** (import `OneSecurity` when naming these types explicitly):
 
-- `CameraAccess`, `MicrophoneAccess`, `ArchiveAccess`, `TelemetryPriority`
+- `CameraAccess`, `MicrophoneAccess`, `ArchiveAccess`
+
+`TelemetryPriority` for PTZ remains in OneDomain (`PTZ/TelemetryPriority.swift`).
+
+### Camera security policy
+
+```swift
+import OneDomain
+import OneSecurity
+
+let user = SecurityApi.makeContext(from: permissionsResponse)
+let policy = camera.viewPolicy(for: user)
+```
 
 ## Usage
 
-### List cameras (JSON body in app layer)
+### List cameras (app layer)
 
 ```swift
 import OneDomain
 import RequestResponse
-// import your HTTP client + EncodeDecode where you handle SSE/multipart
+import HTTP  // Get
 
-let request = DomainApi.cameras(view: .VIEW_MODE_FULL)
-// Send `request` with authenticated client → raw Data
+let builder = RequestBuilder.json(baseURL: accountURL, encoder: JSONEncoder())
+let pages: [CameraListPage] = try await http.pages(
+    DomainApi.cameras(view: .VIEW_MODE_FULL),
+    with: builder
+)
+let cameras = pages.flatMap(\.items)
+```
 
-let decoder = JSONDecoder()
-// Single JSON document (uncommon for list; useful in tests):
-let page = try decoder.decode(CameraListPage.self, from: data)
+`HTTPClient.pages` (Get **HTTP** module) buffers the response, picks SSE vs `multipart/related` from `Content-Type`, and decodes each chunk. Use `pages`, not `send`, for `Request<PagedResponse<…>>`.
 
-// SSE or multipart: use EncodeDecode in the app/test target, e.g.:
-// let pages = try decodeSse(CameraListPage.self, from: raw, using: decoder)
-// let pages = try decodeMultipartRelated(
-//     CameraListPage.self,
-//     contentType: "multipart/related; boundary=ngpboundary",
-//     from: raw,
-//     using: decoder
-// )
+For **tests** on raw fixtures without HTTP, use EncodeDecode directly:
+
+```swift
+let pages = try decodeSse(CameraListPage.self, from: raw, using: JSONDecoder())
+// or decodeMultipartRelated(CameraListPage.self, contentType: ct, from: raw, using: decoder)
 ```
 
 ### Batch get
@@ -89,10 +102,9 @@ Sources mirror proto domains and keep primitives separate:
 ```
 Sources/OneDomain/
 ├── API/           DomainApi, ViewMode, AccessPoint
-├── Access/        CameraAccess, MicrophoneAccess, ArchiveAccess
 ├── Archive/       Archive, ArchiveBinding, StorageSource, StorageType
 ├── BatchGet/      BatchGetCamerasRequest/Response, ResourceLocator
-├── Camera/        Camera, CameraListPage, Panomorph, AlternativeView, …
+├── Camera/        Camera, Camera+ViewPolicy, CameraListPage, …
 ├── Detector/
 ├── IO/            Ray, Relay, SensorSignal
 ├── PTZ/           Telemetry, TelemetryCapabilities, TagAndTrack, …
@@ -157,7 +169,7 @@ Implement Swift **iOS 15+** types for Native BL Domain API messages used by:
 - `GET /v1/domain/cameras` → `ListCamerasResponse` / stream chunks → `CameraListPage`
 - `POST /v1/domain/cameras:batchGet` → `BatchGetCamerasRequest`, `BatchGetCamerasResponse`
 
-Request builders use **[RequestResponse](https://github.com/avgx/RequestResponse)** (`Request<Data>`). Decoding uses **`JSONDecoder`** and synthesized or minimal custom `Decodable`; stream framing uses **[EncodeDecode](https://github.com/avgx/EncodeDecode)** only in tests or the app target.
+Request builders use **[RequestResponse](https://github.com/avgx/RequestResponse)** (`Request<PagedResponse<T>>`). Decoding in the app uses **[Get](https://github.com/avgx/Get)** `HTTPClient.pages`; stream framing helpers live in **[EncodeDecode](https://github.com/avgx/EncodeDecode)** (tests and low-level use).
 
 **Proto source:**  
 `https://github.com/jerrygergov/axxon-telegram-vms/blob/main/support/protos/axxonsoft/bl/domain/Domain.proto`  
@@ -171,10 +183,10 @@ Request builders use **[RequestResponse](https://github.com/avgx/RequestResponse
 4. **`public typealias AccessPoint = String`** — wire field `access_point` .
 5. Copy **proto `///` comments** onto Swift properties when the field maps 1:1.
 6. **Do not model** `search_meta_data` or other list-only metadata not in `CodingKeys`.
-7. **Security / global permissions** APIs → separate package; only keep access **enums** used on the `Camera` tree.
+7. **Security / global permissions** → [OneSecurity](https://github.com/avgx/OneSecurity); OneDomain imports access enums and adds `Camera.viewPolicy(for:)`.
 8. **Folder layout** — place each message/group under:
    - `Primitive/` — `primitive.*` (Circle, Circles, Rectangle, Color → `OverlayColor`)
-   - `Camera/`, `Streaming/`, `Archive/`, `PTZ/`, `Detector/`, `IO/`, `Access/`, `BatchGet/`, `API/`
+   - `Camera/`, `Streaming/`, `Archive/`, `PTZ/`, `Detector/`, `IO/`, `BatchGet/`, `API/`
 9. **EncodeDecode** is a dependency of **OneDomainTests**, not `OneDomain`.
 10. Prefer **synthesized `Decodable`**; add `init(from:)` only for defaults (e.g. empty `next_page_token`) or non-synthesizable cases.
 11. **Enums** with open-ended server values → `SafeEnum<YourEnum>`; known closed sets → `String` raw `Codable` enum.
@@ -189,16 +201,16 @@ Request builders use **[RequestResponse](https://github.com/avgx/RequestResponse
 3. Diff JSON keys across versions → optional vs required table (document in a short comment on `Camera.swift` only; no separate schema test file).
 4. Implement types and `DomainApi` paths.
 5. Add/fix fixtures; run `swift build && swift test`.
-6. Integrate in the app via RequestResponse + your HTTP/SSE/multipart stack (e.g. Get `dev`).
+6. Integrate in the app via RequestResponse + Get `HTTPClient.pages` (SSE/multipart auto-detect).
 
 ### `DomainApi` pattern
 
 ```swift
 public enum DomainApi {
-    public static func cameras(view: ViewMode? = nil) -> Request<Data> {
+    public static func cameras(view: ViewMode? = nil) -> Request<PagedResponse<CameraListPage>> {
         // GET v1/domain/cameras, optional ?view=
     }
-    public static func camerasBatchGet(_ body: BatchGetCamerasRequest) -> Request<Data> {
+    public static func camerasBatchGet(_ body: BatchGetCamerasRequest) -> Request<PagedResponse<BatchGetCamerasResponse>> {
         // POST v1/domain/cameras:batchGet, JSON body
     }
 }
@@ -237,7 +249,7 @@ If you add live-server tests: mark them with a tag (e.g. `.integration`) and **e
 ## Related work
 
 - **OneAccount** — authentication against the same ecosystem; pairs with Get + RequestResponse.
-- **Get (`dev`)** — HTTP, SSE, multipart client; use with EncodeDecode for stream decoding in the app.
+- **Get (`dev`)** — `HTTPClient.pages` for `Request<PagedResponse<T>>`; SSE/multipart line and frame streaming in **SSE** / **Multipart** modules.
 
 ## License
 
