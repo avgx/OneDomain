@@ -100,4 +100,23 @@ struct CameraDecodingTests {
         #expect(withItems.items.first?.alternativeView?.alternativeCameraName.isEmpty == true)
         #expect(withItems.items.last?.detectors?.contains { $0.parentDetector?.isEmpty == false } == true)
     }
+    
+    @Test("decode cameras from raw multipart v1_domain_cameras_x5_0.multipart, take first item, encode, then decode and compare")
+    func roundtrip_with_streams() throws {
+        let raw = try FixtureLoader.loadData(resource: "v1_domain_cameras_x5_0", ext: "multipart")
+        let pages = try decodeMultipartRelated(
+            CameraListPage.self,
+            contentType: "multipart/related; boundary=ngpboundary",
+            from: raw,
+            using: decoder
+        )
+        let withItems = try #require(pages.first { !$0.items.isEmpty })
+        #expect(withItems.items.first?.accessPoint.isEmpty == false)
+        let firstCamera = withItems.items.first!
+        #expect(firstCamera.videoStreams != nil)
+        let encoded = try JSONEncoder().encode(firstCamera)
+        let decoded = try decoder.decode(Camera.self, from: encoded)
+        #expect(firstCamera.videoStreams == decoded.videoStreams)
+        #expect(firstCamera.videoStreams?.first?.displayName == decoded.videoStreams?.first?.displayName)
+    }
 }

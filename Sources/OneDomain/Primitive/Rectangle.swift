@@ -1,7 +1,7 @@
 import Foundation
 
 /// Relative rectangle (primitive.Rectangle).
-public struct Rectangle: Decodable, Equatable, Sendable {
+public struct Rectangle: Codable, Equatable, Sendable {
     public let x: Double?
     public let y: Double?
     public let w: Double?

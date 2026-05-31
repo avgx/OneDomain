@@ -2,7 +2,7 @@ import Foundation
 import OneWireFormat
 
 /// Storage source for archiving.
-public struct StorageSource: Decodable, Equatable, Sendable {
+public struct StorageSource: Codable, Equatable, Sendable {
     public let accessPoint: AccessPoint
     public let storage: AccessPoint
     public let binding: String  //TODO: check AccessPoint

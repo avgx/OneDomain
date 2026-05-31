@@ -2,7 +2,7 @@ import Foundation
 import OneWireFormat
 
 /// Archive binding configuration.
-public struct ArchiveBinding: Decodable, Equatable, Sendable {
+public struct ArchiveBinding: Codable, Equatable, Sendable {
     /// Usually camera or source name.
     public let name: String
     public let storage: AccessPoint

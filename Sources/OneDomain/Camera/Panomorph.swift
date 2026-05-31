@@ -1,7 +1,7 @@
 import Foundation
 
 /// Panomorph mode.
-public struct Panomorph: Decodable, Equatable, Sendable {
+public struct Panomorph: Codable, Equatable, Sendable {
     public let enabled: Bool
     public let fitToFrame: Bool
     public let cameraPosition: Int

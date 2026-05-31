@@ -2,7 +2,7 @@ import Foundation
 import OneWireFormat
 
 /// Scene description for detector.
-public struct SceneDescription: Decodable, Equatable, Sendable {
+public struct SceneDescription: Codable, Equatable, Sendable {
     public let accessPoint: AccessPoint
     public let mimetype: String
 

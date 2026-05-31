@@ -2,7 +2,7 @@ import Foundation
 import SafeEnum
 
 /// Detector event information.
-public struct DetectorEventInfo: Decodable, Equatable, Sendable {
+public struct DetectorEventInfo: Codable, Equatable, Sendable {
     /// Event type.
     public enum EventType: String, Codable, Equatable, Sendable {
         case unspecified = "EVENT_TYPE_UNSPECIFIED"

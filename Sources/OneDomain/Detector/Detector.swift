@@ -2,7 +2,7 @@ import Foundation
 import OneWireFormat
 
 /// Detector configuration.
-public struct Detector: Decodable, Equatable, Sendable, Identifiable {
+public struct Detector: Codable, Equatable, Sendable, Identifiable {
     public var id: String { accessPoint }
 
     public let accessPoint: AccessPoint

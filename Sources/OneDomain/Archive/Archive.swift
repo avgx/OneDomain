@@ -4,7 +4,7 @@ import OneWireFormat
 import SafeEnum
 
 /// Archive configuration.
-public struct Archive: Decodable, Equatable, Sendable, Identifiable {
+public struct Archive: Codable, Equatable, Sendable, Identifiable {
     public var id: String { accessPoint }
 
     public let accessPoint: AccessPoint

@@ -2,7 +2,7 @@ import Foundation
 import OneWireFormat
 
 /// Represents an audio player for a speaker.
-public struct AudioPlayer: Decodable, Equatable, Sendable {
+public struct AudioPlayer: Codable, Equatable, Sendable {
     public let stateControlAp: AccessPoint?
     public let audioSourceAp: AccessPoint?
     public let filePath: String?

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Overlay color (primitive.Color).
-public struct OverlayColor: Decodable, Equatable, Sendable {
+public struct OverlayColor: Codable, Equatable, Sendable {
     public let red: Int?
     public let green: Int?
     public let blue: Int?

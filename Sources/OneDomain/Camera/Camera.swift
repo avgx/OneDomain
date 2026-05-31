@@ -10,7 +10,7 @@ import SafeEnum
 // 3.0.0 default list: новых ключей camera относительно 2.0.0 нет.
 
 /// Camera configuration.
-public struct Camera: Decodable, Equatable, Sendable, Identifiable {
+public struct Camera: Codable, Equatable, Sendable, Identifiable {
     public var id: String { accessPoint }
 
     public let accessPoint: AccessPoint
@@ -43,7 +43,7 @@ public struct Camera: Decodable, Equatable, Sendable, Identifiable {
     public let detectors: [Detector]?
     /// Offline analytics.
     public let offlineDetectors: [Detector]?
-    public let groupIds: [String]?
+    public let groupIds: [GroupID]?
     public let textSources: [TextSource]?
     public let speakers: [Speaker]?
     public let panomorph: Panomorph?

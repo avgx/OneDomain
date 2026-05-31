@@ -2,7 +2,7 @@ import Foundation
 import OneWireFormat
 
 /// Represents a speaker device.
-public struct Speaker: Decodable, Equatable, Sendable, Identifiable {
+public struct Speaker: Codable, Equatable, Sendable, Identifiable {
     public var id: String { accessPoint ?? "" }
 
     public let accessPoint: AccessPoint?
