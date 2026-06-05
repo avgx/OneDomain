@@ -1,10 +1,11 @@
 import Foundation
+import SafeEnum
 
 /// Panomorph mode.
 public struct Panomorph: Codable, Equatable, Sendable {
     public let enabled: Bool
     public let fitToFrame: Bool
-    public let cameraPosition: Int
+    public let cameraPosition: SafeEnum<CameraPosition>
     public let viewType: Int
     public let cameraLens: String
     public let fisheyeCircles: Circles?
