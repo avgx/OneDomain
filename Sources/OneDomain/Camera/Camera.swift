@@ -22,8 +22,10 @@ public struct Camera: Codable, Equatable, Sendable, Identifiable {
     public let cameraAccess: SafeEnum<CameraAccess>
     public let vendor: String
     public let model: String
-    public let firmware: String
-    public let enabled: Bool
+    /// no firmware in legacy 4.5.x
+    public let firmware: String?
+    /// no enabled in legacy 4.5.x
+    public let enabled: Bool?
     public let isActivated: Bool
 
     public let comment: String?
