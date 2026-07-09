@@ -13,6 +13,12 @@ public struct ArchivePlaybackTarget: Sendable, Equatable {
 }
 
 extension ArchiveBinding {
+    var displayTitle: String {
+        archive?.displayName ?? name
+    }
+}
+
+extension ArchiveBinding {
     public func playbackTarget(fallbackCamera: AccessPoint) -> ArchivePlaybackTarget {
         ArchivePlaybackTarget(
             stream: resolvedPlaybackStream(fallbackCamera: fallbackCamera),
@@ -21,7 +27,9 @@ extension ArchiveBinding {
     }
 
     public static func ordered(_ bindings: [Self]) -> [Self] {
-        bindings.sorted { rank($0) < rank($1) }
+        bindings.sorted {
+            rank($0) < rank($1) && $0.displayTitle.localizedCaseInsensitiveCompare($1.displayTitle) == .orderedAscending
+        }
     }
 
     public static func firstPlaybackTarget(
