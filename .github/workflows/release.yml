@@ -11,16 +11,17 @@ permissions:
 jobs:
   verify-and-publish:
     name: Verify and publish GitHub Release
-    runs-on: macos-latest
+    runs-on: macOS-26
+
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select Swift 6.1
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: "6.1"
+      - name: Validate Package.swift
+        run: swift package dump-package > /dev/null
 
       - name: Swift version
         run: swift --version
