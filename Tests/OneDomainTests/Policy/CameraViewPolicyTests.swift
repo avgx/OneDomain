@@ -13,6 +13,7 @@ struct CameraViewPolicyTests {
             prohibitAny: false,
             forceWatermark: false,
             defaultCameraAccess: .forbid,
+            mapsAccess: .unspecified,
             featureAccess: [],
             alertAccess: .forbid
         )
@@ -36,6 +37,7 @@ struct CameraViewPolicyTests {
             prohibitAny: false,
             forceWatermark: false,
             defaultCameraAccess: .full,
+            mapsAccess: .unspecified,
             featureAccess: [],
             alertAccess: .forbid
         )

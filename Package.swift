@@ -18,11 +18,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/avgx/OneSecurity", from: "1.0.0"),
+        .package(url: "https://github.com/avgx/OneSecurity", from: "1.0.3"),
         .package(url: "https://github.com/avgx/RequestResponse", from: "2.0.1"),
         .package(url: "https://github.com/avgx/SafeEnum", from: "1.0.0"),
-        .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.5"),
-        .package(url: "https://github.com/avgx/OneWireFormat", from: "1.0.0"),
+        .package(url: "https://github.com/avgx/EncodeDecode", from: "1.0.7"),
+        .package(url: "https://github.com/avgx/OneWireFormat", from: "1.0.2"),
     ],
     targets: [
         .target(
