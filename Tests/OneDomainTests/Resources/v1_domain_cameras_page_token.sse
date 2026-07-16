@@ -1,0 +1,8 @@
+event: stream-data
+data: {"items":[{"access_point":"hosts/NodeA/DeviceIpint.1/SourceEndpoint.video:0:0","incomplete":false,"display_name":"Camera 1","display_id":"1","ip_address":"0.0.0.0","camera_access":"CAMERA_ACCESS_FULL","vendor":"Virtual","model":"Virtual","firmware":"1.0.0","enabled":true,"is_activated":true},{"access_point":"hosts/NodeA/DeviceIpint.2/SourceEndpoint.video:0:0","incomplete":false,"display_name":"Camera 2","display_id":"2","ip_address":"0.0.0.0","camera_access":"CAMERA_ACCESS_FULL","vendor":"Virtual","model":"Virtual","firmware":"1.0.0","enabled":true,"is_activated":true}],"next_page_token":""}
+
+event: stream-data
+data: {"items":[],"next_page_token":"CkJEZW1vc2VydmVyfGhvc3RzL0RlbW9zZXJ2ZXIvRGV2aWNlSXBpbnQuMi9Tb3VyY2VFbmRwb2ludC52aWRlbzowOjA"}
+
+event: stream-data
+data: {"items":[],"next_page_token":""}

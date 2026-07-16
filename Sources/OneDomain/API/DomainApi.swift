@@ -6,11 +6,25 @@ public enum DomainApi {
     /// Endpoint: `GET /v1/domain/cameras`
     ///
     /// Response is SSE (`text/event-stream`) or `multipart/related` with JSON in `data` payloads.
-    public static func cameras(view: ViewMode? = nil) -> Request<PagedResponse<CameraListPage>> {
+    ///
+    /// Use `pageSize` / `pageToken` to paginate large camera lists (avoids oversized multipart
+    /// streams that some servers may corrupt under concurrency). Pass `CameraListPage.nextPageToken`
+    /// from a chunk as `pageToken` on the next request; stop when the token is empty.
+    public static func cameras(
+        view: ViewMode? = nil,
+        pageSize: Int? = nil,
+        pageToken: String? = nil
+    ) -> Request<PagedResponse<CameraListPage>> {
         var queryItems: [(String, String?)] = []
 
         if let view {
             queryItems.append(("view", view.rawValue))
+        }
+        if let pageSize {
+            queryItems.append(("page_size", String(pageSize)))
+        }
+        if let pageToken {
+            queryItems.append(("page_token", pageToken))
         }
 
         return Request(

@@ -1,0 +1,53 @@
+
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+
+{
+ "items": [
+  {
+   "access_point": "hosts/NodeA/DeviceIpint.1/SourceEndpoint.video:0:0",
+   "incomplete": false,
+   "display_name": "Camera 1",
+   "display_id": "1",
+   "ip_address": "0.0.0.0",
+   "camera_access": "CAMERA_ACCESS_FULL",
+   "vendor": "Virtual",
+   "model": "Virtual",
+   "firmware": "1.0.0",
+   "enabled": true,
+   "is_activated": true
+  },
+  {
+   "access_point": "hosts/NodeA/DeviceIpint.2/SourceEndpoint.video:0:0",
+   "incomplete": false,
+   "display_name": "Camera 2",
+   "display_id": "2",
+   "ip_address": "0.0.0.0",
+   "camera_access": "CAMERA_ACCESS_FULL",
+   "vendor": "Virtual",
+   "model": "Virtual",
+   "firmware": "1.0.0",
+   "enabled": true,
+   "is_activated": true
+  }
+ ],
+ "next_page_token": ""
+}
+
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+Content-Length: 97
+
+{
+ "items": [],
+ "next_page_token": "NodeA|hosts/NodeA/DeviceIpint.2/SourceEndpoint.video:0:0"
+}
+
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+Content-Length: 41
+
+{
+ "items": [],
+ "next_page_token": ""
+}
