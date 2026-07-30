@@ -27,8 +27,11 @@ extension ArchiveBinding {
     }
 
     public static func ordered(_ bindings: [Self]) -> [Self] {
-        bindings.sorted {
-            rank($0) < rank($1) && $0.displayTitle.localizedCaseInsensitiveCompare($1.displayTitle) == .orderedAscending
+        bindings.sorted { lhs, rhs in
+            let rankL = rank(lhs)
+            let rankR = rank(rhs)
+            if rankL != rankR { return rankL < rankR }
+            return lhs.displayTitle.localizedCaseInsensitiveCompare(rhs.displayTitle) == .orderedAscending
         }
     }
 
