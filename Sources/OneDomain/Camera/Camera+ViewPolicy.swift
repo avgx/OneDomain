@@ -11,21 +11,21 @@ extension Camera {
     ///
     /// Group-level permissions are **not** merged client-side; trust `cameraAccess` from the server.
     ///
-    /// - Parameter hasDynamicPrivacyMask: Pass `true` when the selected live stream advertises
-    ///   a dynamic privacy mask (not persisted on `Camera`). Defaults to `false`.
+    /// - Parameter hasDynamicPrivacyMask: Override detector-derived dynamic capability. Defaults to
+    ///   ``hasDynamicPrivacyMask`` from activated privacy detectors on this camera.
     ///
     /// - Returns: Use `canOpen` before navigation; `canViewLive` / `canViewArchive` for stream tabs;
     ///   `watermark` / `masking` for video renderers.
     public func viewPolicy(
         for user: UserSecurityContext,
-        hasDynamicPrivacyMask: Bool = false
+        hasDynamicPrivacyMask: Bool? = nil
     ) -> CameraViewPolicy {
         CameraPolicyEvaluator.evaluate(
             user: user,
             objectAccess: cameraAccess.value ?? .unspecified,
             isArmed: armed,
-            hasStaticPrivacyMask: !(privacyMask?.isEmpty ?? true),
-            hasDynamicPrivacyMask: hasDynamicPrivacyMask,
+            hasStaticPrivacyMask: self.hasStaticPrivacyMask,
+            hasDynamicPrivacyMask: hasDynamicPrivacyMask ?? self.hasDynamicPrivacyMask,
             hasArchives: hasArchiveBindings ?? !(archiveBindings?.isEmpty ?? true)
         )
     }

@@ -15,7 +15,8 @@ struct CameraViewPolicyTests {
             defaultCameraAccess: .forbid,
             mapsAccess: .unspecified,
             featureAccess: [],
-            alertAccess: .forbid
+            alertAccess: .forbid,
+            bookmarkAccess: .no
         )
 
         let policy = camera.viewPolicy(for: user)
@@ -23,7 +24,7 @@ struct CameraViewPolicyTests {
         #expect(policy.canOpen)
         #expect(policy.canViewLive)
         #expect(!policy.canViewArchive) // fixture has no archive bindings
-        #expect(policy.denialReason == .noArchives)
+        #expect(policy.denialReason == DenialReason.noArchives)
     }
 
     @Test("monitoring on protection respects armed state")
@@ -39,13 +40,14 @@ struct CameraViewPolicyTests {
             defaultCameraAccess: .full,
             mapsAccess: .unspecified,
             featureAccess: [],
-            alertAccess: .forbid
+            alertAccess: .forbid,
+            bookmarkAccess: .no
         )
 
         let policy = camera.viewPolicy(for: user)
 
         #expect(policy.canOpen)
         #expect(!policy.canViewLive)
-        #expect(policy.denialReason == .notArmed)
+        #expect(policy.denialReason == DenialReason.notArmed)
     }
 }
