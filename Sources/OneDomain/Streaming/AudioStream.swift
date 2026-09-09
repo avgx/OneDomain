@@ -10,7 +10,7 @@ public struct AudioStream: Codable, Equatable, Sendable {
     public let displayId: String
     public let microphoneAccess: SafeEnum<MicrophoneAccess>?
     public let isActivated: Bool
-    public let enabled: Bool
+    public let enabled: Bool?
 
     private enum CodingKeys: String, CodingKey {
         case accessPoint = "access_point"
