@@ -15,7 +15,7 @@ public struct Archive: Codable, Equatable, Sendable, Identifiable {
     public let archiveAccess: SafeEnum<ArchiveAccess>?
     public let bindings: [ArchiveBinding]   //TODO: check, may be [AccessPoint] 
     public let isActivated: Bool
-    public let enabled: Bool
+    public let enabled: Bool?
     public let storageType: SafeEnum<StorageType>?
 
     private enum CodingKeys: String, CodingKey {
