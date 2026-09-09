@@ -46,7 +46,7 @@ struct AccessPointDecodingTests {
         #expect(embedded.accessPoint.components(separatedBy: "/").count == 4)
 
         let central = try #require(archives.last)
-        let uuidSource = central.bindings.flatMap(\.sources).first {
+        let uuidSource = central.bindings?.flatMap(\.sources).first {
             $0.accessPoint.contains("/Sources/src.") && $0.accessPoint.contains("-")
         }
         #expect(uuidSource != nil)

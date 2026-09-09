@@ -22,6 +22,24 @@ struct DetectorDecodingTests {
         #expect(value.accessPoint.isEmpty == false)
     }
 
+    @Test("legacy next detector omits type typeName groups enabled mimetype")
+    func decode_legacy_next_omitted_optional_fields() throws {
+        let json = """
+        {"access_point":"hosts/SERVERMKD001/AVDetector.1/EventSupplier","display_name":"Детектор движения","display_id":"1","parent_detector":"","is_activated":true,"scene_descriptions":[{"access_point":"hosts/SERVERMKD001/AVDetector.1/SourceEndpoint.mask"},{"access_point":"hosts/SERVERMKD001/AVDetector.1/SourceEndpoint.vmda"}],"events":[{"id":"MotionDetected","name":"","event_type":"TWO_PHASE_EVENT_TYPE"},{"id":"MotionMask","name":"","event_type":"PERIODICAL_EVENT_TYPE"},{"id":"TargetList","name":"","event_type":"PERIODICAL_EVENT_TYPE"}]}
+        """
+        let value = try JSONDecoder().decode(Detector.self, from: Data(json.utf8))
+        #expect(value.type == nil)
+        #expect(value.typeName == nil)
+        #expect(value.groups == nil)
+        #expect(value.enabled == nil)
+        #expect(value.sceneDescriptions.count == 2)
+        #expect(value.sceneDescriptions[0].mimetype == nil)
+        #expect(value.sceneDescriptions[1].mimetype == nil)
+        #expect(value.events.count == 3)
+        #expect(value.events[0].eventType.value == .twoPhase)
+        #expect(value.parentDetector?.isEmpty == true)
+    }
+    
     @Test("parent_detector empty string decodes as empty not nil")
     func parent_detector_empty_string() throws {
         let json = """

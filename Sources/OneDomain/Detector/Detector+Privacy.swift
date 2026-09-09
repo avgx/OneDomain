@@ -10,6 +10,6 @@ extension Detector {
 
     /// Activated privacy detector that requires WS sideband mask packets.
     public var isActivePrivacy: Bool {
-        isActivated && enabled && isPrivacy
+        isActivated && (enabled ?? true) && isPrivacy
     }
 }

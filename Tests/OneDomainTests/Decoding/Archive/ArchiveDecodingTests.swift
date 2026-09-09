@@ -24,8 +24,8 @@ struct ArchiveDecodingTests {
         let archive = try #require(pages.first?.items.first)
         #expect(archive.isEmbedded == true)
         #expect(archive.accessPoint.contains("/MultimediaStorage.0"))
-        #expect(archive.bindings.first?.camera != nil)
-        #expect(archive.bindings.first?.archive == nil)
+        #expect(archive.bindings?.first?.camera != nil)
+        #expect(archive.bindings?.first?.archive == nil)
         #expect(archive.storageType == nil)
     }
 
@@ -35,8 +35,8 @@ struct ArchiveDecodingTests {
         let pages = try decodeSse(ArchiveListPage.self, from: raw, using: decoder)
         let archive = try #require(pages.first?.items.last)
         #expect(archive.isEmbedded == false)
-        #expect(archive.bindings.count == 2)
-        let uuidSource = archive.bindings.flatMap(\.sources).first {
+        #expect(archive.bindings?.count == 2)
+        let uuidSource = archive.bindings?.flatMap(\.sources).first {
             $0.accessPoint.contains("/Sources/src.") && $0.accessPoint.contains("-")
         }
         #expect(uuidSource != nil)
@@ -49,7 +49,7 @@ struct ArchiveDecodingTests {
         let raw = try FixtureLoader.loadData(resource: "v1_domain_archives_2_10_0_full", ext: "sse")
         let pages = try decodeSse(ArchiveListPage.self, from: raw, using: decoder)
         let archive = try #require(pages.first?.items.first)
-        let camera = try #require(archive.bindings.first?.camera)
+        let camera = try #require(archive.bindings?.first?.camera)
         #expect(camera.cameraAccess.rawValue == "CAMERA_ACCESS_UNSPECIFIED")
         #expect(camera.archiveBindings?.isEmpty == true)
     }

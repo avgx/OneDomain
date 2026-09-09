@@ -10,13 +10,13 @@ public struct Detector: Codable, Equatable, Sendable, Identifiable {
     public let displayId: String
     /// can be empty string
     public let parentDetector: AccessPoint?
-    public let type: String
-    public let typeName: String
+    public let type: String?
+    public let typeName: String?
     public let isActivated: Bool
-    public let groups: [String]
+    public let groups: [String]?
     public let sceneDescriptions: [SceneDescription]
     public let events: [DetectorEventInfo]
-    public let enabled: Bool
+    public let enabled: Bool?
     public let isRealtimeRecognitionEnabled: Bool?
     public let isRecordingObjectsTrackingEnabled: Bool?
     /// Endpoint of the event frame stream. Omitted by some server builds when unused.
