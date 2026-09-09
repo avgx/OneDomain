@@ -9,8 +9,8 @@ public struct ArchiveBinding: Codable, Equatable, Sendable {
     public let camera: Camera?      //TODO: check it.
     public let archive: Archive?    //TODO: check it.
     public let isDefault: Bool
-    public let isReplica: Bool
-    public let isPermanent: Bool
+    public let isReplica: Bool?
+    public let isPermanent: Bool?
     public let hasLiveSources: Bool?
     public let hasReplicaSources: Bool?
     public let originStorage: String?

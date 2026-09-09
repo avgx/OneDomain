@@ -13,7 +13,7 @@ public struct Archive: Codable, Equatable, Sendable, Identifiable {
     public let displayId: String
     public let isEmbedded: Bool             // deprecated, use storage_type
     public let archiveAccess: SafeEnum<ArchiveAccess>?
-    public let bindings: [ArchiveBinding]   //TODO: check, may be [AccessPoint] 
+    public let bindings: [ArchiveBinding]?   //TODO: check, may be [AccessPoint] 
     public let isActivated: Bool
     public let enabled: Bool?
     public let storageType: SafeEnum<StorageType>?
