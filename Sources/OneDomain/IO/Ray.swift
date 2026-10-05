@@ -9,7 +9,7 @@ public struct Ray: Codable, Equatable, Sendable, Identifiable {
     public let displayName: String
     public let displayId: String
     public let inputSignal: SensorSignal?
-    public let isActivated: Bool
+    public let isActivated: Bool?
     public let enabled: Bool
 
     private enum CodingKeys: String, CodingKey {
