@@ -8,12 +8,12 @@ public struct Telemetry: Codable, Equatable, Sendable {
     public let displayName: String
     public let displayId: String
     public let telemetryPriority: SafeEnum<TelemetryPriority>?
-    public let enabled: Bool
+    public let enabled: Bool?
     public let capabilities: TelemetryCapabilities?
-    public let discreteOverContinuous: Bool
-    public let patrolStateControlAccessPoint: AccessPoint
+    public let discreteOverContinuous: Bool?
+    public let patrolStateControlAccessPoint: AccessPoint?
     public let tagAndTrack: TagAndTrack?
-    public let isActivated: Bool
+    public let isActivated: Bool?
 
     private enum CodingKeys: String, CodingKey {
         case accessPoint = "access_point"
