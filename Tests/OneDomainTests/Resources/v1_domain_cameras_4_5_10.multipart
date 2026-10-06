@@ -1,0 +1,201 @@
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+Content-Length: 4948
+
+{
+ "items": [
+  {
+   "access_point": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+   "display_name": "Camera",
+   "display_id": "1",
+   "ip_address": "0.0.0.0",
+   "camera_access": "CAMERA_ACCESS_FULL",
+   "vendor": "Vendor",
+   "model": "Model",
+   "comment": "",
+   "armed": false,
+   "geo_location_latitude": "0.000000",
+   "geo_location_longitude": "0.000000",
+   "geo_location_azimuth": "0.000000",
+   "breaks_unused_connections": false,
+   "video_streams": [
+    {
+     "stream_acess_point": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+     "decoder_acess_point": "hosts/DemoServer/VideoDecoder.1/SourceEndpoint.video",
+     "enabled": false,
+     "display_name": "",
+     "display_id": "0",
+     "is_activated": true
+    }
+   ],
+   "microphones": [
+    {
+     "access_point": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.audio:0",
+     "display_name": "",
+     "display_id": "0",
+     "microphone_access": "MICROPHONE_ACCESS_FULL",
+     "is_activated": false
+    }
+   ],
+   "ptzs": [
+    {
+     "access_point": "hosts/DemoServer/DeviceIpint.1/TelemetryControl.0",
+     "display_name": "",
+     "display_id": "0",
+     "telemetry_priority": "TELEMETRY_PRIORITY_HIGHEST",
+     "capabilities": {
+      "move_supported": {
+       "is_relative": false,
+       "is_continuous": true,
+       "is_absolute": false,
+       "is_auto": false
+      },
+      "focus_supported": {
+       "is_relative": false,
+       "is_continuous": true,
+       "is_absolute": false,
+       "is_auto": false
+      },
+      "zoom_supported": {
+       "is_relative": false,
+       "is_continuous": true,
+       "is_absolute": false,
+       "is_auto": false
+      },
+      "iris_supported": {
+       "is_relative": false,
+       "is_continuous": false,
+       "is_absolute": false,
+       "is_auto": false
+      },
+      "is_area_zoom_supported": false,
+      "is_point_move_supported": false,
+      "maximum_preset_count": 0,
+      "is_tours_supported": false,
+      "limits": {
+       "0": {
+        "continuous_speed": {
+         "min": 0,
+         "max": 1
+        }
+       },
+       "1": {
+        "relative_step": {
+         "min": 0,
+         "max": 1
+        },
+        "continuous_speed": {
+         "min": 0,
+         "max": 1
+        }
+       },
+       "2": {
+        "relative_step": {
+         "min": 0,
+         "max": 1
+        },
+        "continuous_speed": {
+         "min": 0,
+         "max": 1
+        },
+        "absolute_position": {
+         "min": 0,
+         "max": 1
+        }
+       }
+      }
+     },
+     "is_activated": false
+    }
+   ],
+   "archive_bindings": [
+    {
+     "name": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+     "storage": "hosts/DemoServer/MultimediaStorage.A/MultimediaStorage",
+     "archive": {
+      "access_point": "hosts/DemoServer/MultimediaStorage.A/MultimediaStorage",
+      "display_name": "Archive",
+      "display_id": "MultimediaStorage.A",
+      "is_embedded": false,
+      "archive_access": "ARCHIVE_ACCESS_FULL",
+      "bindings": [],
+      "is_activated": true
+     },
+     "is_default": true,
+     "sources": [
+      {
+       "access_point": "hosts/DemoServer/MultimediaStorage.A/Sources/src.00000000-0000-4000-8000-000000000001",
+       "storage": "hosts/DemoServer/MultimediaStorage.A/MultimediaStorage",
+       "binding": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+       "media_source": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+       "origin": "hosts/DemoServer/DeviceIpint.1/SourceEndpoint.video:0:0",
+       "mimetype": "video/H264",
+       "origin_storage": "",
+       "origin_storage_source": ""
+      }
+     ]
+    }
+   ],
+   "ray": [
+    {
+     "access_point": "hosts/DemoServer/DeviceIpint.1/EventSupplier.ray0:0",
+     "display_name": "",
+     "display_id": "0"
+    }
+   ],
+   "relay": [
+    {
+     "access_point": "hosts/DemoServer/DeviceIpint.1/StateControl.relay0:0",
+     "display_name": "",
+     "display_id": "0"
+    }
+   ],
+   "detectors": [
+    {
+     "access_point": "hosts/DemoServer/AVDetector.1/EventSupplier",
+     "display_name": "Detector",
+     "display_id": "1",
+     "parent_detector": "",
+     "is_activated": true,
+     "scene_descriptions": [
+      {
+       "access_point": "hosts/DemoServer/AVDetector.1/SourceEndpoint.vmda"
+      }
+     ],
+     "events": [
+      {
+       "id": "MotionDetected",
+       "name": "",
+       "event_type": "TWO_PHASE_EVENT_TYPE"
+      }
+     ]
+    }
+   ],
+   "offline_detectors": [],
+   "group_ids": [
+    "00000000-0000-4000-8000-000000000002"
+   ],
+   "is_activated": true,
+   "text_sources": [],
+   "speakers": [
+    {
+     "access_point": "hosts/DemoServer/DeviceIpint.1/SinkEndpoint.0",
+     "display_name": "",
+     "display_id": "0",
+     "state_control_ap": "hosts/DemoServer/AudioPlayer.1/StateControl",
+     "audio_source_ap": "hosts/DemoServer/AudioPlayer.1/SourceEndpoint.audio",
+     "is_activated": false
+    }
+   ]
+  }
+ ],
+ "next_page_token": ""
+}
+--ngpboundary
+Content-Type: application/json; charset=utf-8
+Content-Length: 40
+
+{
+ "items": [],
+ "next_page_token": ""
+}

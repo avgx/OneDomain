@@ -45,6 +45,34 @@ struct CameraDecodingTests {
         #expect(withItems.items.first?.accessPoint.isEmpty == false)
     }
     
+    @Test("decode cameras from raw multipart v1_domain_cameras_4_5_10.multipart")
+    func decode_multipart_4_5_10() throws {
+        let raw = try FixtureLoader.loadData(resource: "v1_domain_cameras_4_5_10", ext: "multipart")
+        let pages = try decodeMultipartRelated(
+            CameraListPage.self,
+            contentType: "multipart/related; boundary=ngpboundary",
+            from: raw,
+            using: decoder
+        )
+        let camera = try #require(pages.first { !$0.items.isEmpty }?.items.first)
+        #expect(camera.accessPoint.isEmpty == false)
+        #expect(camera.firmware == nil)
+        #expect(camera.enabled == nil)
+        #expect(camera.incomplete == nil)
+        #expect(camera.videoStreams?.first?.fps == nil)
+        #expect(camera.microphones?.first?.enabled == nil)
+        #expect(camera.ptzs?.first?.enabled == nil)
+        #expect(camera.archiveBindings?.first?.isReplica == nil)
+        #expect(camera.archiveBindings?.first?.archive?.enabled == nil)
+        #expect(camera.archiveBindings?.first?.sources.first?.prerecording == nil)
+        #expect(camera.ray?.first?.enabled == nil)
+        #expect(camera.relay?.first?.enabled == nil)
+        #expect(camera.detectors?.first?.enabled == nil)
+        #expect(camera.detectors?.first?.storyboard == nil)
+        #expect(camera.detectors?.first?.sceneDescriptions.first?.mimetype == nil)
+        #expect(camera.speakers?.first?.enabled == nil)
+    }
+    
     @Test("decode cameras from raw multipart v1_domain_cameras_x5_0.multipart")
     func decode_multipart_x5() throws {
         let raw = try FixtureLoader.loadData(resource: "v1_domain_cameras_x5_0", ext: "multipart")
