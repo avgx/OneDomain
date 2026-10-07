@@ -13,7 +13,8 @@ public enum DomainApi {
     public static func cameras(
         view: ViewMode? = nil,
         pageSize: Int? = nil,
-        pageToken: String? = nil
+        pageToken: String? = nil,
+        query: DomainCameraQuery? = nil
     ) -> Request<PagedResponse<CameraListPage>> {
         var queryItems: [(String, String?)] = []
 
@@ -25,6 +26,9 @@ public enum DomainApi {
         }
         if let pageToken {
             queryItems.append(("page_token", pageToken))
+        }
+        if let query {
+            queryItems.append(contentsOf: query.queryItems)
         }
 
         return Request(
