@@ -31,3 +31,9 @@ public struct Archive: Codable, Equatable, Sendable, Identifiable {
         case storageType = "storage_type"
     }
 }
+
+extension Archive {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}

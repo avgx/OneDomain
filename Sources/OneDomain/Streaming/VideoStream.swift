@@ -23,3 +23,8 @@ public struct VideoStream: Codable, Equatable, Sendable {
     }
 }
 
+extension VideoStream {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}

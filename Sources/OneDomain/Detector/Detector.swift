@@ -48,3 +48,9 @@ public struct Detector: Codable, Equatable, Sendable, Identifiable {
         case reportImageDescriptor = "report_image_descriptor"
     }
 }
+
+extension Detector {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}

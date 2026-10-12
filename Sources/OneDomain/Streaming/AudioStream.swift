@@ -22,4 +22,9 @@ public struct AudioStream: Codable, Equatable, Sendable {
     }
 }
 
+extension AudioStream {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}
 
