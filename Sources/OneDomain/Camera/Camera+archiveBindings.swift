@@ -3,7 +3,7 @@ import Foundation
 extension Camera {
     public var archiveBindingsForEnabledAndActivatedArchives: [ArchiveBinding]? {
         return archiveBindings?
-            .filter({ $0.archive?.enabled ?? false })
+            .filter({ $0.archive?.enabled ?? true })
             .filter({$0.archive?.isActivated ?? false})
     }
 }
