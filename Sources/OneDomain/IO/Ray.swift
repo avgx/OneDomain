@@ -21,3 +21,9 @@ public struct Ray: Codable, Equatable, Sendable, Identifiable {
         case enabled
     }
 }
+
+extension Ray {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}

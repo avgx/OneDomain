@@ -19,3 +19,9 @@ public struct Relay: Codable, Equatable, Sendable, Identifiable {
         case enabled
     }
 }
+
+extension Relay {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}

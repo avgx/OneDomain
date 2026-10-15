@@ -14,7 +14,7 @@ public struct ArchivePlaybackTarget: Sendable, Equatable {
 
 extension ArchiveBinding {
     var displayTitle: String {
-        archive?.displayName ?? name
+        archive?.displayNameFixed ?? name
     }
 }
 

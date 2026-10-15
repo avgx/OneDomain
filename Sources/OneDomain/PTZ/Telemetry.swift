@@ -29,3 +29,8 @@ public struct Telemetry: Codable, Equatable, Sendable {
     }
 }
 
+extension Telemetry {
+    public var displayNameFixed: String {
+        displayName.isEmpty ? displayId : displayName
+    }
+}
