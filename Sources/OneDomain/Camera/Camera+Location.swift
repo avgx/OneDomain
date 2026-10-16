@@ -45,6 +45,10 @@ public struct Location : Codable, Sendable, Equatable, CustomDebugStringConverti
         if latitudeVal == 0 && longitudeVal == 0 {
             return nil
         }
+
+        guard (-90...90).contains(latitudeVal), (-180...180).contains(longitudeVal) else {
+            return nil
+        }
         
         var headingVal: Double? = nil
         if let azStr = azimuth {
