@@ -2,7 +2,8 @@ import Foundation
 
 /// PTZ helper types (`axxonsoft.bl.ptz`) used by domain camera models.
 ///
-/// Source: `TelemetryHelper.proto`.
+/// Source: `TelemetryHelper.proto` (`Capabilities`, `Range`, `Limits`).
+/// `PtzFreedom` is `TelemetryCapabilities.EFreedom` from `Domain.proto`.
 public struct PtzCapabilities: Codable, Equatable, Sendable {
     public let isRelative: Bool?
     public let isContinuous: Bool?
@@ -64,5 +65,16 @@ public struct PtzLimits: Codable, Equatable, Sendable {
         case continuousSpeed = "continuous_speed"
         case absolutePosition = "absolute_position"
     }
+}
+
+/// Axis key of `TelemetryCapabilities.limits`.
+///
+/// JSON object keys are these raw integers (`"2"` is focus, `"3"` is zoom).
+public enum PtzFreedom: Int, Codable, Hashable, Sendable {
+    case pan = 0
+    case tilt = 1
+    case focus = 2
+    case zoom = 3
+    case iris = 4
 }
 
