@@ -8,7 +8,7 @@ public struct TextSource: Codable, Equatable, Sendable, Identifiable {
     public let accessPoint: AccessPoint
     public let displayName: String
     public let displayId: String
-    public let enabled: Bool
+    public let enabled: Bool?
 
     private enum CodingKeys: String, CodingKey {
         case accessPoint = "access_point"
